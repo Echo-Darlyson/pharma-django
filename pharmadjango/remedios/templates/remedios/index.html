@@ -13,14 +13,20 @@
         <h1>PharmaDjango</h1>
     </header>
     <section>
-        {% for remedio in remedios %}
+        {% if remedios %}
+            {% for remedio in remedios %}
+                <div>
+                    <h2>{{ remedio.nome }}</h2>
+                    <p>Tarja: {{ remedio.tarja }}</p>
+                    <p>Precisa de Receita: {{ remedio.precisa_receita }}</p>	
+                    <p class='price'>Preço: R$ {{ remedio.preco }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
             <div>
-                <h2>{{ remedio.nome }}</h2>
-                <p>Tarja: {{ remedio.tarja }}</p>
-                <p>Precisa de Receita: {{ remedio.precisa_receita }}</p>	
-                <p class='price'>Preço: R$ {{ remedio.preco }}</p>
+                <h2>Nenhum remédio encontrado :(</h2>
             </div>
-        {% endfor %}
+        {% endif %}
     </section>
 </body>
 </html>
