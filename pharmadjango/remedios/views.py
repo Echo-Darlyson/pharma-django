@@ -4,7 +4,12 @@ from .models import Remedio
 from django.template import loader
 
 def lista_medicamentos(request):
-    template = loader.get_template("remedios/index.html")
-    return HttpResponse(template.render())
+    """lista todos os medicamentos cadastrados
 
-# Create your views here.
+        Args:
+            request (request): requisição do usuário
+
+    """
+    remedios = Remedio.objects.all()
+    context = {'remedios': remedios}
+    return render(request, 'remedios/index.html', context)
