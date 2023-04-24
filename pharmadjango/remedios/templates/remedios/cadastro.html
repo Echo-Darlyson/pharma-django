@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaDjango</title>
+    <link rel="stylesheet" href="{% static 'remedios/css/style2.css' %}">
+</head>
+<body>
+    <header>
+        <h1>PharmaDjango</h1>
+        <a href="/remedios/listamedicamentos">Listar Remédios</a>
+    </header>
+    <section>
+            <div>
+                <form method="post" action="/remedios/cadastramedicamentos">
+                    {% csrf_token %}
+                    <label for="nome">Nome</label>
+                    <input type="text" name="nome">
+                    <label for="preco">Preço</label>
+                    <input type="text" name="preco">
+                    <label for="tarja">Tarja</label>
+                    <input type="text" name="tarja">
+                    <label for="receita">Precisa de Receita</label>
+                    <input type="text" name="receita">
+
+                    <input type="submit" value="Cadastrar" id="submit-button">
+                </form>
+
+            </div>
+    </section>
+</body>
+</html>
