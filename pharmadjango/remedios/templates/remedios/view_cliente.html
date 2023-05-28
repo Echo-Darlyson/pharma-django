@@ -7,11 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PharmaDjango</title>
     <link rel="stylesheet" href="{% static 'remedios/css/style.css' %}">
+    <link rel="icon" type="image/png" href="https://img.icons8.com/?size=512&id=1j53gNErF86o&format=png"/>
 </head>
 <body>
     <header>
         <h1>PharmaDjango</h1>
-        <a href="/remedios/cadastramedicamentos">Cadastrar Remédio</a>
+        <a href="">Carrinho</a>
     </header>
     <section>
         {% if remedios %}
@@ -21,13 +22,17 @@
                     <p>Tarja: {{ remedio.tarja }}</p>
                     <p>Precisa de Receita: {{ remedio.precisa_receita }}</p>	
                     <p class='price'>Preço: R$ {{ remedio.preco }}</p>
+                    <a href="{% url 'adicionar' remedio.id %}">Adicionar ao Carrinho</a>
                 </div>
             {% endfor %}
         {% else %}
             <div>
-                <h2>Nenhum remédio encontrado :(</h2>
+                <h2>Nenhum remédio encontrado</h2>
             </div>
         {% endif %}
     </section>
+    <footer>
+        PharmaDjango &copy 2023
+    </footer>
 </body>
 </html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaDjango</title>
+    <link rel="stylesheet" href="{% static 'remedios/css/style2.css' %}">
+    <link rel="icon" type="image/png" href="https://img.icons8.com/?size=512&id=1j53gNErF86o&format=png"/>
+</head>
+<body>
+    <header>
+        <h1>PharmaDjango</h1>
+    </header>
+    <section>
+            <div>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <label for="usuario">Nome</label>
+                    <input type="text" name="usuario">
+                    <label for="senha">Senha</label>
+                    <input type="password" name="senha">
+
+                    <input type="submit" value="Login" id="submit-button">
+                </form>
+
+                <p>Caso seja cliente clique no botão abaixo.</p>
+
+                <form action="listamedicamentoscliente">
+                    <input type="submit" value="Cliente" id="submit-button">
+                </form>
+
+                <p>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <script>alert("{{ message }}")</script>
+                        {% endfor %}
+                    {% endif %}
+                </p>
+
+            </div>
+    </section>
+    <footer>
+        PharmaDjango &copy 2023
+    </footer>
+</body>
+</html>

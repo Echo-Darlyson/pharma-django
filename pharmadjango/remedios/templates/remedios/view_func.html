@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaDjango</title>
+    <link rel="stylesheet" href="{% static 'remedios/css/style.css' %}">
+    <link rel="icon" type="image/png" href="https://img.icons8.com/?size=512&id=1j53gNErF86o&format=png"/>
+</head>
+<body>
+    <header>
+        <h1>PharmaDjango</h1>
+        <a href="cadastramedicamentos">Cadastrar Remédio</a>
+    </header>
+    <section>
+        {% if remedios %}
+            {% for remedio in remedios %}
+                <div>
+                    <h2>{{ remedio.nome }}</h2>
+                    <p>Tarja: {{ remedio.tarja }}</p>
+                    <p>Precisa de Receita: {{ remedio.precisa_receita }}</p>	
+                    <p class='price'>Preço: R$ {{ remedio.preco }}</p>
+                    <a href="{% url 'deletar' remedio.id %}">Deletar</a>
+                    <a href="">Alterar</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div>
+                <h2>Nenhum remédio encontrado</h2>
+            </div>
+        {% endif %}
+    </section>
+    <footer>
+        PharmaDjango &copy 2023
+    </footer>
+</body>
+</html>

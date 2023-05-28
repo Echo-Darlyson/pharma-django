@@ -7,15 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PharmaDjango</title>
     <link rel="stylesheet" href="{% static 'remedios/css/style2.css' %}">
+    <link rel="icon" type="image/png" href="https://img.icons8.com/?size=512&id=1j53gNErF86o&format=png"/>
 </head>
 <body>
     <header>
         <h1>PharmaDjango</h1>
-        <a href="/remedios/listamedicamentos">Listar Remédios</a>
+        <a href="listamedicamentosfunc">Listar Remédios</a>
     </header>
     <section>
             <div>
-                <form method="post" action="/remedios/cadastramedicamentos">
+                <form method="post" action="cadastramedicamentos">
                     {% csrf_token %}
                     <label for="nome">Nome</label>
                     <input type="text" name="nome">
@@ -31,5 +32,8 @@
 
             </div>
     </section>
+    <footer>
+        PharmaDjango &copy 2023
+    </footer>
 </body>
 </html>
