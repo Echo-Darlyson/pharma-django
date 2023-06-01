@@ -9,5 +9,5 @@ urlpatterns = [
     path("deletamedicamento/<remedio_id>", views.deletar, name="deletar"),
     path("exibircarrinho", views.exibir_carrinho, name="exibir_carrinho"),
     path("adicionarcarrinho/<remedio_id>", views.adicionar_carrinho, name="adicionar_carrinho"),  # noqa: E501
-    path("login", views.logar, name="logar"),
+    path("", views.logar, name="logar"),
 ]
