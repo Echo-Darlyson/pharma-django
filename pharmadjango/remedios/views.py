@@ -1,8 +1,10 @@
 from django.shortcuts import redirect, render
-from .models import Remedio
+from .models import Remedio, Carrinho
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+
 import re
+import json
 
 
 def lista_medicamentos_func(request):
@@ -59,7 +61,7 @@ def cadastra_medicamentos(request):
                 preco = preco.replace(',', '.')
             preco = float(preco)
 
-        Remedio.objects.create(nome=nome, tarja=tarja, precisa_receita=receita, preco=preco)
+        Remedio.objects.create(nome=nome, tarja=tarja, precisa_receita=receita, preco=preco)  # noqa: E501
 
     return render(request, "remedios/cadastro.html")
 
@@ -94,9 +96,70 @@ def deletar(request, remedio_id):
     return redirect("/listamedicamentosfunc")
 
 
-def adicionar_carrinho(request, remedio_id):
-    remedio = Remedio.objects.get(pk=remedio_id)
+def exibir_carrinho(request):
+    """exibe o carrinho de compras
 
-    context = {"remedio": remedio}
+    Args:
+        request (request): requisição do usuário
+
+    """
+    carrinho = Carrinho.objects.order_by("-id").first()
+
+    options = None
+    if carrinho:
+        carrinho = carrinho.remedios
+        carrinho = json.loads(carrinho)
+        options = []
+        for item in carrinho:
+            remedio = Remedio.objects.get(pk=item['id'])
+            options.append({
+                "nome": remedio.nome,
+                "preco": float(remedio.preco),
+                "tarja": remedio.tarja,
+                "precisa_receita": remedio.precisa_receita
+            })
+
+    context = {"remedios": options}
 
     return render(request, "remedios/carrinho.html", context)
+
+
+def adicionar_carrinho(request, remedio_id):
+    """Adiciona um remedio ao carrinho
+
+    Args:
+        request (request): requisição do usuário
+        remedio_id (int): id do remedio a ser adicionado
+
+    """
+    carrinho = Carrinho.objects.order_by("-id").first()
+
+    options = []
+    if carrinho:
+        items = json.loads(carrinho.remedios)
+        for item in items:
+            if item != remedio_id:
+                items.append(remedio_id)
+                carrinho.remedios = json.dumps(items)
+                carrinho.save()
+
+            remedio = Remedio.objects.get(pk=item)
+            options.append({
+                "nome": remedio.nome,
+                "preco": float(remedio.preco),
+                "tarja": remedio.tarja,
+                "precisa_receita": remedio.precisa_receita
+            })
+    else:
+        remedio = Remedio.objects.get(pk=remedio_id)
+        options.append({
+            "nome": remedio.nome,
+            "preco": float(remedio.preco),
+            "tarja": remedio.tarja,
+            "precisa_receita": remedio.precisa_receita
+        })
+        Carrinho.objects.create(remedios=json.dumps(options), total=0)
+
+    print(f'Options: {options}')
+    context = {"remedios": options}
+    return render(request, "remedios/carrinho.html", context=context)
