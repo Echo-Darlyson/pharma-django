@@ -16,8 +16,14 @@
     </header>
     <section>
             <div>
-                {% if remedio %}
-                    {{ remedio }}
+                {% if remedios %}
+                    {% for remedio in remedios %}
+                    <h3 class="title">{{ remedio.nome }}</h3>
+                    <p class="price">Preço: R$ {{ remedio.preco }}</p>
+                    <button class="remove-btn">Remover</button>
+                    {% endfor %}
+                {% else %}
+                    <h3>Nenhum remédio encontrado no carrinho</h3>
                 {% endif %}
 
             </div>

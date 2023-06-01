@@ -12,7 +12,7 @@
 <body>
     <header>
         <h1>PharmaDjango</h1>
-        <a href="">Carrinho</a>
+        <a href="{% url 'exibir_carrinho'  %}">Carrinho</a>
     </header>
     <section>
         {% if remedios %}
@@ -22,7 +22,7 @@
                     <p>Tarja: {{ remedio.tarja }}</p>
                     <p>Precisa de Receita: {{ remedio.precisa_receita }}</p>	
                     <p class='price'>Preço: R$ {{ remedio.preco }}</p>
-                    <a href="{% url 'adicionar' remedio.id %}">Adicionar ao Carrinho</a>
+                    <a href="{% url 'adicionar_carrinho' remedio.id %}">Adicionar ao Carrinho</a>
                 </div>
             {% endfor %}
         {% else %}
