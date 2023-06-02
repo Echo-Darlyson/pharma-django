@@ -125,7 +125,7 @@ def exibir_carrinho(request):
 
 
 def adicionar_carrinho(request, remedio_id):
-    """Adiciona um remedio ao carrinho
+    """Adiciona um remedio ao carrinho (caso já não o tenha)
 
     Args:
         request (request): requisição do usuário
@@ -137,22 +137,22 @@ def adicionar_carrinho(request, remedio_id):
     options = []
     if carrinho:
         items = json.loads(carrinho.remedios)
-        for item in items:
-            if item != remedio_id:
-                items.append(remedio_id)
-                carrinho.remedios = json.dumps(items)
-                carrinho.save()
-
-            remedio = Remedio.objects.get(pk=item)
-            options.append({
+        ids_list = [item['id'] for item in items]
+        if remedio_id not in ids_list:
+            remedio = Remedio.objects.get(pk=remedio_id)
+            items.append({
+                "id": remedio.id,
                 "nome": remedio.nome,
                 "preco": float(remedio.preco),
                 "tarja": remedio.tarja,
                 "precisa_receita": remedio.precisa_receita
             })
+            carrinho.remedios = json.dumps(items)
+            carrinho.save()
     else:
         remedio = Remedio.objects.get(pk=remedio_id)
         options.append({
+            "id": remedio.id,
             "nome": remedio.nome,
             "preco": float(remedio.preco),
             "tarja": remedio.tarja,
@@ -160,6 +160,4 @@ def adicionar_carrinho(request, remedio_id):
         })
         Carrinho.objects.create(remedios=json.dumps(options), total=0)
 
-    print(f'Options: {options}')
-    context = {"remedios": options}
-    return render(request, "remedios/carrinho.html", context=context)
+    return redirect("exibir_carrinho")
