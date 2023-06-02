@@ -1,82 +1,82 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: sans-serif;
-    background-image: url("../img/background.jpg");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-  }
-  
-  header {
-    padding: 1.2em;
-    background-color: mediumaquamarine;
-    color: white;
-  }
-  
-  h1 {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-top: 2rem;
-  }
-  
-  section {
-    margin: 2rem auto;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    max-width: 800px;
-  }
-  
-  div {
-    background-color: rgb(255, 255, 255);
-    width: 600px;
-    height: 400px;
-    margin: 1rem;
-    padding: 1rem;
-    border: 1px solid gray;
-    border-radius: 5px;
-    text-align: center;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  p {
-    margin-bottom: 0.5rem;
-  }
-  
-  a{
-    text-decoration: none;
-    color: white;
-    background-color: rgb(70, 165, 134);
-    padding: 0.5em;
-    border-style: solid;
-    border-color: rgb(53, 124, 100);
-    border-width: 2px;
-    display: block;
-    width: 10em;
-    margin: auto;
-    margin-top: 1em;
-    text-align: center;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-label{
+body {
+  font-family: sans-serif;
+  background-image: url("../img/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+header {
+  padding: 0.8em;
+  background-color: mediumaquamarine;
+  color: white;
+}
+
+h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+section {
+  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 800px;
+}
+
+div {
+  background-color: #fff;
+  width: 600px;
+  height: 400px;
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid gray;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+p {
+  margin-bottom: 0.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  background-color: rgb(70, 165, 134);
+  padding: 0.5em;
+  border-style: solid;
+  border-color: rgb(53, 124, 100);
+  border-width: 2px;
+  display: block;
+  width: 10em;
+  margin: auto;
+  margin-top: 1em;
+  text-align: center;
+}
+
+label {
   display: block;
   margin-bottom: 1em;
   margin-top: 1em;
   font-weight: bold;
 }
 
-input{
+input {
   border-style: none;
   border-bottom-style: solid;
   outline-style: none;
 }
 
-#submit-button{
+#submit-button {
   display: block;
   margin: auto;
   margin-top: 1.5em;
@@ -89,18 +89,17 @@ input{
   cursor: pointer;
 }
 
-footer{
-  position: absolute;
+footer {
+  position: fixed;
   bottom: 0;
-  margin-bottom: 0;
+  left: 0;
+  width: 100%;
   background-color: mediumaquamarine;
   color: #fff;
-  width: 100%;
   height: 5vh;
   text-align: center;
-  align-items: center;
   padding-top: 10px;
-  }
+}
 
 .container {
   display: flex;
@@ -110,22 +109,45 @@ footer{
 .item {
   display: flex;
   align-items: center;
-  margin-bottom: 20px; /* Adicione o espaçamento desejado */
+  margin-bottom: 20px;
 }
 
-.title {
-  margin-right: 10px;
+.remedio-card {
+  flex: 1 1 300px; /* Define o tamanho flexível do card */
+  background-color: #fff;
+  height: 100%; /* Altera para altura 100% para ocupar todo o espaço disponível */
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid gray;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
 }
 
-.price {
-  margin-right: 10px;
+.remedio-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
-.remove-btn {
-  background-color: #ff0000;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  margin-left: 10px;
+.remedio-card p {
+  margin-bottom: 0.5rem;
+}
+
+.remedio-card .price {
+  font-weight: bold;
+}
+
+.remedio-card a {
+  text-decoration: none;
+  color: white;
+  background-color: rgb(70, 165, 134);
+  padding: 0.5em;
+  border-style: solid;
+  border-color: rgb(53, 124, 100);
+  border-width: 2px;
+  display: block;
+  width: 10em;
+  margin: auto;
+  margin-top: 1em;
+  text-align: center;
 }

@@ -15,18 +15,19 @@
         <a href="">Finalizar Compra</a>
     </header>
     <section>
-            <div>
-                {% if remedios %}
-                    {% for remedio in remedios %}
-                    <h3 class="title">{{ remedio.nome }}</h3>
+            {% if remedios %}
+                {% for remedio in remedios %}
+                <div class="remedio-card">
+                    <h2>{{ remedio.nome }}</h2>
+                    <p>Tarja: {{ remedio.tarja }}</p>
+                    <p>Precisa de Receita: {{ remedio.precisa_receita }}</p>	
                     <p class="price">Preço: R$ {{ remedio.preco }}</p>
-                    <button class="remove-btn">Remover</button>
-                    {% endfor %}
-                {% else %}
-                    <h3>Nenhum remédio encontrado no carrinho</h3>
-                {% endif %}
-
-            </div>
+                    <a href="{% url 'remover_remedio_carrinho' remedio.id %}">Remover</a>
+                </div>
+                {% endfor %}
+            {% else %}
+                <h3>Nenhum remédio encontrado no carrinho</h3>
+            {% endif %}
     </section>
     <footer>
         PharmaDjango &copy 2023
