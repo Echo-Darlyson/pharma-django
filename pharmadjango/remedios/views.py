@@ -82,7 +82,7 @@ def logar(request):
 
         else:
             messages.success(request, ("Usuário ou senha incorretos"))
-            return redirect("/login")
+            return redirect("/")
 
     else:
 
@@ -126,22 +126,27 @@ def exibir_carrinho(request):
         request (request): requisição do usuário
 
     """
-    carrinho = Carrinho.objects.order_by("-id").first()
+    carrinho_db = Carrinho.objects.order_by("-id").first()
 
     options = None
-    if carrinho:
-        carrinho = carrinho.remedios
-        carrinho = json.loads(carrinho)
+    if carrinho_db:
+        carrinho = carrinho_db.remedios
+        items = json.loads(carrinho)
         options = []
-        for item in carrinho:
-            remedio = Remedio.objects.get(pk=item['id'])
-            options.append({
-                "id": remedio.id,
-                "nome": remedio.nome,
-                "preco": float(remedio.preco),
-                "tarja": remedio.tarja,
-                "precisa_receita": remedio.precisa_receita
-            })
+        for item in items:
+            try:
+                remedio = Remedio.objects.get(pk=item['id'])
+                options.append({
+                    "id": remedio.id,
+                    "nome": remedio.nome,
+                    "preco": float(remedio.preco),
+                    "tarja": remedio.tarja,
+                    "precisa_receita": remedio.precisa_receita
+                })
+            except Remedio.DoesNotExist:
+                options = [item for item in items if item['id'] != item['id']]
+                carrinho_db.remedios = json.dumps(options)
+                carrinho_db.save()
 
     context = {"remedios": options}
 
