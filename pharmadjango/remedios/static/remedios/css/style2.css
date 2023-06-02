@@ -91,15 +91,15 @@ input {
 
 footer {
   position: fixed;
-  bottom: 0;
   left: 0;
+  bottom: 0;
   width: 100%;
-  background-color: mediumaquamarine;
-  color: #fff;
-  height: 5vh;
+  background-color: #f2f2f2;
+  color: #333;
+  padding: 20px;
   text-align: center;
   padding-top: 10px;
-}
+  }
 
 .container {
   display: flex;
@@ -150,4 +150,26 @@ footer {
   margin: auto;
   margin-top: 1em;
   text-align: center;
+}
+
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  div {
+    width: 90%; /* Reduz a largura para se ajustar à tela */
+  }
+
+  .remedio-card {
+    flex-basis: 90%; /* Reduz a largura dos cards para se ajustar à tela */
+  }
+}
+
+@media (max-width: 480px) {
+  div {
+    height: auto; /* Remove a altura fixa para se ajustar ao conteúdo */
+  }
+
+  .remedio-card {
+    flex-basis: 100%; /* Define a largura dos cards para ocupar todo o espaço disponível */
+  }
 }
