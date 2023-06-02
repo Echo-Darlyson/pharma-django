@@ -96,6 +96,29 @@ def deletar(request, remedio_id):
     return redirect("/listamedicamentosfunc")
 
 
+def remover_remedio_carrinho(request, remedio_id):
+    """Remove um remedio do carrinho
+
+    Args:
+        request (request): requisição do usuário
+        remedio_id (int): id do remedio a ser removido
+
+    """
+    carrinho = Carrinho.objects.order_by("-id").first()
+
+    if carrinho:
+        items = json.loads(carrinho.remedios)
+        ids_list = [item['id'] for item in items]
+        if remedio_id in ids_list:
+            remedio = Remedio.objects.get(pk=remedio_id)
+            if remedio:
+                items = [item for item in items if item['id'] != remedio_id]
+                carrinho.remedios = json.dumps(items)
+                carrinho.save()
+
+    return redirect("exibir_carrinho")
+
+
 def exibir_carrinho(request):
     """exibe o carrinho de compras
 
@@ -113,6 +136,7 @@ def exibir_carrinho(request):
         for item in carrinho:
             remedio = Remedio.objects.get(pk=item['id'])
             options.append({
+                "id": remedio.id,
                 "nome": remedio.nome,
                 "preco": float(remedio.preco),
                 "tarja": remedio.tarja,
